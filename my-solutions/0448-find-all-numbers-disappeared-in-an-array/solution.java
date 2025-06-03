@@ -5,22 +5,18 @@ class Solution {
         while (i < nums.length) {
             int correctIndex = nums[i] - 1;
             if (nums[i] != nums[correctIndex]) {
-                swap(nums, i, correctIndex);
+                int temp = nums[i];
+                nums[i] = nums[correctIndex];
+                nums[correctIndex] = temp;
             } else {
                 i++;
             }
         }
-        for (int j = 0; j < nums.length; j++) {
-            if (nums[j] != j + 1) {
-                ans.add(j + 1);
+        for (int index = 0; index < nums.length; index++) {
+            if (nums[index] != index + 1) {
+                ans.add(index + 1);
             }
         }
         return ans;
-    }
-
-    void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
     }
 }
