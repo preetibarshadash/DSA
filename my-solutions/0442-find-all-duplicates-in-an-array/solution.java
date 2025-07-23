@@ -3,11 +3,9 @@ class Solution {
         List<Integer> ans = new ArrayList<>();
         int i = 0;
         while (i < nums.length) {
-            int correct = nums[i] - 1;
-            if (nums[i] != nums[correct]) {
-                int temp = nums[i];
-                nums[i] = nums[correct];
-                nums[correct] = temp;
+            int correctIndex = nums[i] - 1;
+            if (nums[i] != nums[correctIndex]) {
+                swap(nums, i, correctIndex);
             } else {
                 i++;
             }
@@ -18,5 +16,11 @@ class Solution {
             }
         }
         return ans;
+    }
+
+    public void swap(int[] arr, int i, int correct) {
+        int temp = arr[i];
+        arr[i] = arr[correct];
+        arr[correct] = temp;
     }
 }
