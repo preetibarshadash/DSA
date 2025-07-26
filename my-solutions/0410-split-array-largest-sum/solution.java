@@ -1,25 +1,27 @@
 class Solution {
-    public int splitArray(int[] array, int m) {
-        int start = 0, end = 0;
-        for (int i = 0; i < array.length; i++) {
-            start = Math.max(start, array[i]);
-            end += array[i];
+    public int splitArray(int[] nums, int k) {
+        int start = 0;
+        int end = 0;
+        for (int i = 0; i < nums.length; i++) {
+            start = Math.max(start, nums[i]);
+            end += nums[i];
         }
-
         while (start < end) {
-            int pieces = 1;
+            int mid = start + (end - start) / 2;
             int currentSum = 0;
-            int maxSumAllowed = start + (end - start) / 2;
-            for (int num : array) {
-                if (currentSum + num > maxSumAllowed) {
-                    currentSum = num;
+            int pieces = 1;
+            for (int num : nums) {
+                if (currentSum + num > mid) {
                     pieces++;
+                    currentSum = num;
                 } else {
                     currentSum += num;
                 }
             }
-            if (pieces > m) start = maxSumAllowed + 1;
-            else end = maxSumAllowed;
+            if (pieces > k)
+                start = mid + 1;
+            else
+                end = mid;
         }
         return end;
     }
