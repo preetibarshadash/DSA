@@ -1,18 +1,15 @@
 class Solution {
     public int largestAltitude(int[] gain) {
-        int initialAlt = 0;
-        int[] alt = new int[gain.length + 1];
-
-        for(int i = 0; i < gain.length; i++){
-            initialAlt += gain[i];
-            alt[i] = initialAlt;
+        int n = gain.length;
+        int[] alt = new int[n + 1];
+        alt[0] = 0;
+        for (int i = 0; i < n; i++) {
+            alt[i + 1] = alt[i] + gain[i];
         }
-
-        int max = Integer.MIN_VALUE;
-        for(int ele : alt){
-            if(ele > max){
-                max = ele;
-            }
+        int max = alt[0];
+        for (int a : alt) {
+            if (a > max)
+                max = a;
         }
         return max;
     }
