@@ -6,24 +6,23 @@ class Solution {
                 matrix[i][j] = 0;
             }
         }
-        for (int[] index : indices) {
-            int row = index[0];
-            int col = index[1];
-            for (int j = 0; j < n; j++) {
-                matrix[row][j]++;
-            }
+        for (int[] idx : indices) {
+            int row = idx[0];
+            int col = idx[1];
             for (int i = 0; i < m; i++) {
                 matrix[i][col]++;
             }
-        }
-        int count = 0;
-        for (int[] row : matrix) {
-            for (int col : row) {
-                if (col % 2 != 0) {
-                    count++;
-                }
+            for (int j = 0; j < n; j++) {
+                matrix[row][j]++;
             }
         }
-        return count;
+        int ans = 0;
+        for (int[] row : matrix) {
+            for (int column : row) {
+                if (column % 2 != 0)
+                    ans++;
+            }
+        }
+        return ans;
     }
 }
