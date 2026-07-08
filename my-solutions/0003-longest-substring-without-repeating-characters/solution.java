@@ -1,21 +1,20 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int n = s.length(), low = 0, high = 0;
+        int longest = Integer.MIN_VALUE;
         int[] freq = new int[256];
-        int ans = 0;
         while (high < n) {
-            char c = s.charAt(high);
-            freq[c]++;
-            while (freq[c] > 1) {
-                int lowC = s.charAt(low);
-                freq[lowC]--;
+            char highEle = s.charAt(high);
+            freq[highEle]++;
+            while (freq[highEle] > 1) {
+                freq[s.charAt(low)]--;
                 low++;
             }
-
-            int window = high - low + 1;
-            ans = Math.max(ans, window);
+            int len = high - low + 1;
+            longest = Math.max(longest, len);
             high++;
         }
-        return ans;
+
+        return longest == Integer.MIN_VALUE ? 0 : longest;
     }
 }
