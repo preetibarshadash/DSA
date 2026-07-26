@@ -1,44 +1,19 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if (s.length() != t.length()) {
+        if (s.length() != t.length())
             return false;
+        Map<Character, Integer> sMap = new HashMap<>();
+        Map<Character, Integer> tMap = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            sMap.put(c, sMap.getOrDefault(c, 0) + 1);
         }
-        char[] s1 = s.toCharArray();
-        char[] t1 = t.toCharArray();
-
-        sort(s1, 0, s1.length - 1);
-        sort(t1, 0, t1.length - 1);
-
-        return String.valueOf(s1).equals(String.valueOf(t1));
-    }
-
-    public void sort(char[] s, int low, int high) {
-        if (low >= high) {
-            return;
+        for (char c : t.toCharArray()) {
+            tMap.put(c, tMap.getOrDefault(c, 0) + 1);
         }
-
-        int start = low;
-        int end = high;
-        char pivot = s[low + (high - low) / 2];
-
-        while (start <= end) {
-            while (s[start] < pivot) {
-                start++;
-            }
-            while (s[end] > pivot) {
-                end--;
-            }
-            if (start <= end) {
-                char temp = s[start];
-                s[start] = s[end];
-                s[end] = temp;
-                start++;
-                end--;
-            }
+        for (char c : s.toCharArray()) {
+            if (!sMap.get(c).equals(tMap.get(c)))
+                return false;
         }
-
-        sort(s, low, end);
-        sort(s, start, high);
+        return true;
     }
 }
-
