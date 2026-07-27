@@ -1,14 +1,15 @@
 class Solution {
     public void moveZeroes(int[] nums) {
-        int insertPos = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0) {
-                int temp = nums[i];
-                nums[i] = nums[insertPos];
-                nums[insertPos] = temp;
-                insertPos++;
+        int low = 0;
+        for (int high = 0; high < nums.length; high++) {
+            if (nums[high] != 0) {
+                if (high != low) {
+                    int temp = nums[high];
+                    nums[high] = nums[low];
+                    nums[low] = temp;
+                }
+                low++;
             }
         }
-        System.out.println(Arrays.toString(nums));
     }
 }
